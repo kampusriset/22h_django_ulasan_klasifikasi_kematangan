@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block isi_konten %}
+<h1 class="text-center my-5 text-primary"><b>Update Data</b></h1>
+
+<div class="container">
+    <form method="POST" class="card col-9 shadow-lg p-5 rounded-lg mx-auto">
+        {% csrf_token %}
+        
+        <!-- Pengguna Input -->
+        <div class="form-group mb-3">
+            <label for="pengguna" class="form-label">Pengguna: <b>{{data.pengguna}}</b></label>
+            <input type="hidden" class="form-control" value="{{data.pengguna}}" name="pengguna" required>
+        </div>
+        
+        <!-- Rating saat ini -->
+        <div class="form-group mb-3">
+            <label class="form-label">Rating saat ini: <i class="bi bi-star-fill text-warning" style="font-size: 1.2rem;"></i> <b>{{data.rating}}</b></label>
+        </div>
+        
+        <!-- Rating Update -->
+        <div class="form-group mb-3">
+            <label for="rating" class="form-label">Ubah Rating menjadi: <i class="bi bi-star-fill text-warning" style="font-size: 1.2rem;"></i></label>
+            <select name="rating" class="form-select" required>
+                <option value="1" {% if data.rating == "1" %}selected{% endif %}>1</option>
+                <option value="2" {% if data.rating == "2" %}selected{% endif %}>2</option>
+                <option value="3" {% if data.rating == "3" %}selected{% endif %}>3</option>
+                <option value="4" {% if data.rating == "4" %}selected{% endif %}>4</option>
+                <option value="5" {% if data.rating == "5" %}selected{% endif %}>5</option>
+            </select>
+        </div>
+
+        <!-- Komentar -->
+        <div class="form-group mb-4">
+            <label for="komen" class="form-label">Komentar:</label>
+            <textarea name="komen" class="form-control" rows="5" required>{{data.komen}}</textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-lg float-right">Update</button>
+        </div>
+    </form>
+</div>
+
+{% endblock isi_konten %}

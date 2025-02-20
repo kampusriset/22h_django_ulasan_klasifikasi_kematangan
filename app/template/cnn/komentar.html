@@ -1,0 +1,66 @@
+{% load static %}
+<div class="col-12 komentar" align="center">
+    <div class="col-3">
+        <span>Bagikan Pengalaman Anda</span>
+    </div>
+    <div class="col-12" align="left" style="padding: 4% 5% 4% 5%;">
+        <form method="POST">
+            <h1><b>Ulasan</b></h1>
+            {% if request.user.is_authenticated %}
+            {% csrf_token %}
+            <input type="hidden" name="pengguna" value="{{user}}">
+            {% endif %}
+            <label for="rating">Rating anda untuk website ini </label><br><i class="bi bi-star-fill text-warning" style="font-size:xx-large; margin-right: 0.5%;"></i>
+            <select name="rating" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select><br>
+            <label for="rating">Apa pendapat Anda tentang website ini? </label><br>
+            <textarea name="komen" rows="5" placeholder="Ceritakan lebih lanjut pengalaman anda dengan kami"
+                required></textarea><br><br>
+            {% if request.user.is_authenticated %}
+            <input class="btn btn-primary" name="tombol" type="submit" value="Submit">
+            {% else %}
+            <p><i>Silahkan Login terlebih dahulu untuk berkomentar</i></p>
+            <button disabled>Submit</button>
+            {% endif %}
+        </form>
+        {% for read in data %}
+        <div class="col-12 isikomen">
+            {% if read.pengguna == "admin" %}
+            <h5><b style="color:#fa5623">{{ read.pengguna }}</b></h5>
+            {% else %}
+            <h5><b>{{ read.pengguna }}</b></h5>
+            <p>{{ read.ditambahkan }}</p>
+            {% endif %}
+    
+            {% if read.rating == "1" %}
+                {% for star in bintang1 %}
+                    <img src="{{ star }}" width="2%">
+                {% endfor %}
+            {% elif read.rating == "2" %}
+                {% for star in bintang2 %}
+                    <img src="{{ star }}" width="2%">
+                {% endfor %}
+            {% elif read.rating == "3" %}
+                {% for star in bintang3 %}
+                    <img src="{{ star }}" width="2%">
+                {% endfor %}
+            {% elif read.rating == "4" %}
+                {% for star in bintang4 %}
+                    <img src="{{ star }}" width="2%">
+                {% endfor %}
+            {% elif read.rating == "5" %}
+                {% for star in bintang5 %}
+                    <img src="{{ star }}" width="2%">
+                {% endfor %}
+            {% endif %}
+    
+            <br><p><i>"{{ read.komen }}"</i></p><br>
+        </div>
+    {% endfor %}
+    </div>
+</div>

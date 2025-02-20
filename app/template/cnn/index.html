@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block isi_konten %}
+{% load static %}
+<div class="container-fluid" style="margin-bottom: 15%;" id="home">
+    <div class="row">
+        <div class="col-6" align="center">
+            <img src="{% static 'img/logo-huge.png' %}" width="30%" style="margin-top: 10%;"><br><br>
+            <p style="font-size: 40px;">
+                <b style="color:#e5ac1d">Cashew </b>
+                <b style="color:#fb2333">Fruit </b>
+                <b style="color:#61aa0c">Meter</b>
+            </p>
+            <span style="font-size: 20px;">Cek Kematangan <span style="background-color:#ffe355;padding: 0.5%;border-radius: 5px;">
+            Buah</span> Jambu Mete Anda Disini</span>
+        </div>
+        {% if request.method == "POST" %}
+        <div class="col-6" align="left" style="padding-top: 2%;">
+        {% else %}
+        <div class="col-6" align="left" style="padding-top: 7%;">
+        {% endif %}
+            <form method="post" enctype="multipart/form-data" class=" formcnn">
+                {% csrf_token %}
+                <div class="" align="center">
+                    <label class="lbel" for="file-upload">Upload Gambar</label>
+                    <input type="file" class="inputgambar" id="file-upload" name="image" onchange="updateFileName()" />
+                    <div class="filepilih" id="file-name">Belum ada file yang dipilih</div>
+                    <button type="submit" class="cekmatang">Cek Kematangan</button>
+                </div>
+            </form>
+
+            {% if request.method == "POST" %}
+            <div align="center" class="outpcnn">
+                <h3><b>Hasil Prediksi</b></h3>
+                
+                    {% if result == "Matang" %}
+                    <p>Buah jambu mete anda <b class="matang">{{ result }}</b></p>
+                    {% elif result == "Belum Matang" %}
+                    <p>Buah jambu mete anda <b class="belummatang">{{ result }}</b></p>
+                    {% else %}
+                    <p>Kami tidak mendeteksi buah jambu mete, silahkan periksa gambar anda kembali</p>
+                    {% endif %}
+                <img src="{{ image.image.url }}" alt="Uploaded Image" width="100%" height="100%" style="border-radius: 20px;" /><br><br>
+                <!-- <p align="right"style="font-size: 10px;">Akurasi prediksi adalah 92%, terdapat 8% kemungkinan untuk terjadi kesalahan*</p> -->
+            </div>
+            {% endif %}
+        </div>
+        </div>
+    </div>
+</div>
+<div class="container" style="color:#383838;margin-bottom: 20%;" id="about">
+    <div class="row">
+        <div class="col-6">
+            <h2 align="justify"><b>Cek kematangan buah jambu mete anda secara otomatis dalam waktu 5 detik saja!</b></h2><br>
+            <p  style="font-size: 20px;">
+                Tidak masalah ukuran gambar anda berapa pixel, format gambar PNG, JPG, JPEG, maupun WEBP, semua bisa disini.
+                Cek sekarang kematangan buah jambu mete anda menggunakan teknologi yang AI canggih, hanya dengan sekali klik saja!
+            </p>
+        </div>
+        <div class="col-6" align="center">
+            <img src="{% static 'img/hand.png' %}" width="55%">
+        </div>
+    </div>
+</div>
+<div class="con_artkl" id="artikel">
+{% include 'cnn/artikel.html'%}
+</div>
+<div class="rateus" id="komentar">
+</div>
+{% include 'cnn/komentar.html'%}
+
+{% endblock isi_konten %}

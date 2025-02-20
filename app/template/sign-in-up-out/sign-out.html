@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block isi_konten %}
+
+    <div class="row justify-content-center m-3">
+        <div class="col-md-6">
+            <div class="card shadow-lg rounded-lg mt-5 border border-danger p-4">
+                <div class="card-body text-center">
+                    <h3 class="text-danger mb-4">Anda yakin ingin logout?</h3>
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-lg mb-3">Logout</button>
+                    </form>
+
+                    <a class="btn btn-outline-secondary btn-lg" href="{{ request.META.HTTP_REFERER }}">Batal</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock isi_konten %}

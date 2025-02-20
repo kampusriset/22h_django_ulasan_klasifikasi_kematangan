@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block isi_konten %}
+{% load static %}
+<div class="col-fluid-12 bg-white">
+    <div class="container mt-4 col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-3">
+                    <h2>Tabel Daftar Komentar</h2>
+                    <a href="/create" class="btn btn-success">Tambah Data +</a>
+                </div>
+                <form method="GET" class="d-flex align-items-center mb-3">
+                    <input type="text" name="cari" class="form-control w-50" placeholder="Cari apa..."
+                        value="{{ request.GET.cari }}">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-search"></i> 
+                    </button>
+                </form>
+
+                <table class="table table-hover table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Pengguna</th>
+                            <th scope="col">Rating</th>
+                            <th scope="col">Komentar</th>
+                            <th scope="col">Waktu Ditambahkan</th>
+                            <th scope="col">Waktu Diupdate</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for read in page_obj %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ read.pengguna }}</td>
+                            <td><i class="bi bi-star-fill text-warning"></i> {{ read.rating }}</td>
+                            <td>{{ read.komen }}</td>
+                            <td>{{ read.ditambahkan }}</td>
+                            <td>{{ read.diupdate }}</td>
+                            <td class="p-2">
+                                <a href="/edit/{{ read.id }}" class="btn btn-primary btn-md m-1">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a href="/delete/{{ read.id }}" class="btn btn-danger btn-md m-1"
+                                    onclick="return confirm('Apakah Anda yakin ingin menghapus?')">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center mt-4">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1" aria-label="First">
+                            <span aria-hidden="true">&laquo;&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    <li class="page-item disabled">
+                        <span class="page-link">Halaman {{ page_obj.number }} dari {{ page_obj.paginator.num_pages}}</span>
+                    </li>
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                            <span aria-hidden="true">&raquo;&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock isi_konten %}

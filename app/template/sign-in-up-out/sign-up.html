@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block isi_konten %}
+    <div class="container col-12">
+        <div class="row justify-content-center ">
+            <div class="col-md-6">
+                <div class="card mt-5 shadow-lg">
+                    <div class="card-header text-center text-white bg-primary">
+                        <h3>Daftar Akun</h3>
+                    </div>
+                    <div class="card-body">
+                        {% if messages %}
+                        <div class="messages">
+                            {% for message in messages %}
+                
+                                {% if message.tags == 'success' %}
+                                    <div class="alert alert-success">
+                                        <p>{{ message }}</p>
+                                    </div>
+                                {% endif %}
+                                
+                                {% if message.tags == 'error' %}
+                                    <div class="alert alert-danger">
+                                        <p>{{ message }}</p>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <form method="POST" class="mt-4">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="id_username">Username:</label>
+                                <input type="text" name="username" maxlength="150" class="form-control" autofocus="" required="" id="id_username">
+                                <small class="helptext">Username minimal harus memiliki 7 karakter.</small><br>
+                                
+                                <label for="id_email" class="mt-3">Alamat Email:</label>
+                                <input type="email" name="email" maxlength="254" class="form-control" required id="id_email">
+                                
+                                <label for="id_first_name" class="mt-3">Nama Depan:</label>
+                                <input type="text" name="first_name" maxlength="150" class="form-control" id="id_first_name" required>
+                                
+                                <label for="id_last_name" class="mt-3">Nama Belakang:</label>
+                                <input type="text" name="last_name" maxlength="150" class="form-control" id="id_last_name" required>
+                                
+                                <label for="id_password1" class="mt-3">Kata Sandi:</label>
+                                <input type="password" name="password1" autocomplete="new-password" class="form-control" required="" id="id_password1">
+                                <small class="helptext">Kata sandi harus terdiri dari minimal 8 karakter, tidak boleh sama dengan informasi pribadi lain, tidak boleh hanya angka, dan tidak boleh terlalu umum.</small>
+                                
+                                <ul class="mt-2">
+                                    <li>Kata sandi Anda tidak boleh terlalu mirip dengan informasi pribadi lainnya.</li>
+                                    <li>Kata sandi harus mengandung minimal 8 karakter.</li>
+                                    <li>Kata sandi tidak boleh terlalu umum digunakan.</li>
+                                    <li>Kata sandi tidak boleh hanya berupa angka.</li>
+                                </ul>
+                                
+                                <label for="id_password2" class="mt-3">Konfirmasi Kata Sandi:</label>
+                                <input type="password" name="password2" autocomplete="new-password" class="form-control" required="" id="id_password2">
+                                <small class="helptext">Masukkan kata sandi yang sama untuk verifikasi.</small>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block mt-3">Daftar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock isi_konten %}

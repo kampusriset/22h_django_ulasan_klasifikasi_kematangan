@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block isi_konten %}
+<h1 class="text-center my-5 text-success"><b>Tambah Data</b></h1>
+
+<div class="container">
+    <form method="POST" class="card col-8 shadow-lg p-4 rounded-lg mx-auto p-5">
+        {% csrf_token %}
+        
+        <!-- Pengguna Dropdown -->
+        <div class="form-group mb-3">
+            <label for="pengguna" class="form-label">Pengguna:</label>
+            <select name="pengguna" class="form-select" aria-label="Pilih Pengguna" required>
+                {% for read in data %}
+                    <option value="{{read.username}}">{{read.username}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <!-- Rating Dropdown -->
+        <div class="form-group mb-3">
+            <label for="rating" class="form-label">Rating: <i class="bi bi-star-fill text-warning" style="font-size:larger;"></i></label>
+            <select name="rating" class="form-select" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+
+        <!-- Komentar Textarea -->
+        <div class="form-group mb-4">
+            <label for="komen" class="form-label">Komentar:</label>
+            <textarea name="komen" class="form-control" rows="5" placeholder="Masukkan komentar Anda..." required></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-grid">
+            <button type="submit" class="btn btn-success btn-lg float-right">Tambah</button>
+        </div>
+    </form>
+</div>
+
+{% endblock isi_konten %}
