@@ -10,12 +10,12 @@ Aplikasi ini berfungsi untuk melakukan klasifikasi kematangan buah jambu mete se
 
 Berikut adalah flowchart yang menggambarkan alur kerja aplikasi:
 
-![Flowchart](https://github.com/akarmakna/dashboard_fastapi/blob/main/screenshoots/user_flowchart_final.png)
+![Flowchart](https://github.com/kampusriset/22h_django_ulasan_klasifikasi_kematangan/blob/main/screenshoots/user_flowchart.jpg)
 
 ## Persyaratan
 
 Aplikasi ini memerlukan pre-trained model, yang harus diletakkan pada folder app/media
-Berikut adalah link download model[Klik di sini](https://drive.google.com/file/d/161ShSlL8hWHLwwy6BAny6ZQg0y59Bh4A/view?usp=sharing)
+Berikut adalah link download model [Klik di sini](https://drive.google.com/file/d/161ShSlL8hWHLwwy6BAny6ZQg0y59Bh4A/view?usp=sharing)
 
 ## Perkenalan Tim
 
